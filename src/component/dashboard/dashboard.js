@@ -88,7 +88,8 @@ export default function Dashboard() {
   });
   const [removeToothAlert, setRemoveToothAlert] = useState({
     active: null,
-    number: "",
+    color: "white",
+    number:''
   });
 
   const [soinsStandardDialog, setSoinsStandardDialog] = useState(false);
@@ -167,7 +168,8 @@ export default function Dashboard() {
     setRemovedTooth((d) => [...d, removeToothAlert.number]);
     setRemoveToothAlert({
       active: null,
-      number: "",
+      color: "gray",
+      number:''
     });
   };
   const addSoinStandardDialog = (
@@ -402,7 +404,8 @@ export default function Dashboard() {
           onClick={() =>
             setRemoveToothAlert({
               active: null,
-              number: "",
+              color: 'gray',
+              number:''
             })
           }
           color="primary"
@@ -495,7 +498,6 @@ export default function Dashboard() {
         margin: "20px",
         width: "98%",
         marginTop: "0",
-        transform: "translateY(-9%)",
       }}
     >
       {renderMenu(selectFamilyPopup?.family + "-" + selectFamilyPopup?.cell)}
@@ -793,6 +795,7 @@ export default function Dashboard() {
                 padding: "10px 0px",
                 textAlign: "center",
               }}
+              className="underline"
             >
               <Typography
                 variant="h5"
@@ -1111,10 +1114,10 @@ export default function Dashboard() {
                                 )
                                   ? "#8FCC6B"
                                   : teethFamilyInProgress.includes(
-                                      row + "-" + n
-                                    )
-                                  ? "#9CCCEF"
-                                  : "#fff",
+                                    row + "-" + n
+                                  )
+                                    ? "#9CCCEF"
+                                    : "#fff",
                               }}
                               onClick={(e) => {
                                 if (selectedFamily.includes(row + "-" + n)) {
@@ -1166,22 +1169,6 @@ export default function Dashboard() {
                         <TableCell style={{ border: 0 }}></TableCell>
                         {teethGroup1.map((n) => (
                           <TableCell
-                            onClick={() => {
-                              if (!removedTooth.includes(n)) {
-                                setRemoveToothAlert({
-                                  active: true,
-                                  number: n,
-                                });
-                              }
-                            }}
-                            style={{
-                              cursor: removedTooth.includes(n)
-                                ? "default"
-                                : "pointer",
-                              visibility: removedTooth.includes(n)
-                                ? "hidden"
-                                : "visible",
-                            }}
                             className={classes.teethFamily}
                           >
                             {n}
@@ -1189,7 +1176,7 @@ export default function Dashboard() {
                         ))}
                       </TableRow>
                       <TableRow>
-                        <p></p>
+                      <TableCell style={{ border: 0 }}></TableCell>
                         {teethGroup1.map((chrome) => (
                           <TableCell
                             style={{
@@ -1197,47 +1184,62 @@ export default function Dashboard() {
                               marginBottom: "10px",
                             }}
                           >
-                            <svg
-                              style={{ marginLeft: "10px" }}
-                              width="30"
-                              height="30"
-                              viewBox="0 0 30 28"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <a 
+                            onClick={() => {
+                              if (!removedTooth.includes(chrome)) {
+                                setRemoveToothAlert({
+                                  active: true,
+                                  number:chrome,
+                                  color: 'gray',
+                                });
+                              }
+                            }}
+                            style={{
+                              cursor:'pointer'
+                            }}
                             >
-                              <path
-                                d="M29.3238 13.9668C29.3238 21.4338 23.0308 27.5139 15.234 27.5139C7.43716 27.5139 1.1441 21.4338 1.1441 13.9668C1.1441 6.49987 7.43716 0.419732 15.234 0.419732C23.0308 0.419732 29.3238 6.49987 29.3238 13.9668Z"
-                                fill="white"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M20.3994 13.9656C20.3994 16.8344 17.9787 19.187 14.9588 19.187C11.9388 19.187 9.51812 16.8344 9.51812 13.9656C9.51812 11.0968 11.9388 8.74414 14.9588 8.74414C17.9787 8.74414 20.3994 11.0968 20.3994 13.9656Z"
-                                fill="white"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M25.1412 4.70015L19.1426 10.2058"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M11.1901 17.9943L5.19141 23.5"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M24.6056 23.4999L18.8634 17.7465"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M10.9344 10.3401L5.19267 4.58717"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                            </svg>
+                              <svg
+                                style={{ marginLeft: "10px" }}
+                                width="30"
+                                height="30"
+                                viewBox="0 0 30 28"
+                                fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29.3238 13.9668C29.3238 21.4338 23.0308 27.5139 15.234 27.5139C7.43716 27.5139 1.1441 21.4338 1.1441 13.9668C1.1441 6.49987 7.43716 0.419732 15.234 0.419732C23.0308 0.419732 29.3238 6.49987 29.3238 13.9668Z"
+                                  fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M20.3994 13.9656C20.3994 16.8344 17.9787 19.187 14.9588 19.187C11.9388 19.187 9.51812 16.8344 9.51812 13.9656C9.51812 11.0968 11.9388 8.74414 14.9588 8.74414C17.9787 8.74414 20.3994 11.0968 20.3994 13.9656Z"
+                                  fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M25.1412 4.70015L19.1426 10.2058"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M11.1901 17.9943L5.19141 23.5"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M24.6056 23.4999L18.8634 17.7465"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M10.9344 10.3401L5.19267 4.58717"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                              </svg>
+                            </a>
                           </TableCell>
                         ))}
                       </TableRow>
@@ -1347,10 +1349,10 @@ export default function Dashboard() {
                                 )
                                   ? "#8FCC6B"
                                   : teethFamilyInProgress.includes(
-                                      row + "-" + n
-                                    )
-                                  ? "#9CCCEF"
-                                  : "#fff",
+                                    row + "-" + n
+                                  )
+                                    ? "#9CCCEF"
+                                    : "#fff",
                               }}
                               onClick={(e) => {
                                 if (selectedFamily.includes(row + "-" + n)) {
@@ -1410,8 +1412,8 @@ export default function Dashboard() {
               width="349px"
               height="417px"
               style={{
-                marginLeft: "17%",
-                marginTop: "28%",
+                marginLeft: "35%",
+                marginTop: "32%",
                 border: "1px solid #E3EBF0",
                 borderRadius: "12px",
               }}
