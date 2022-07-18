@@ -26,6 +26,9 @@ import ExtractImage from "../../images/cross.png";
 import MuiTableCell from "@material-ui/core/TableCell";
 import CardComp from "../Card/CardComp";
 import CardSt from "../Card/CardSt";
+import endo1 from '../../images/ENDO1.png'
+import endo2 from '../../images/ENDO2.png'
+import endo3 from '../../images/ENDO3.png'
 
 const useStyles = makeStyles((theme) => ({
   teethFamily: {
@@ -43,16 +46,13 @@ const teethFamilySample = [
 ];
 const endoTreatment = [
   {
-    label: 'endo1', value: 'endo1'
+    label: 'endo1', value: 'endo1',img:endo1
   },
   {
-    label: 'endo2', value: 'endo2'
+    label: 'endo2', value: 'endo2',img:endo2
   },
   {
-    label: 'endo3', value: 'endo3'
-  },
-  {
-    label: 'endo4', value: 'endo4'
+    label: 'endo3', value: 'endo3',img:endo3
   },
 ]
 
@@ -115,6 +115,7 @@ export default function Dashboard() {
     soin: "",
     subcategory: "",
   });
+  const [selectedTreatment,setSelectedTreatment]=useState('')
   const teethFamily = ["IMPLANT", "PROTHESE FIXE", "PROVISOIRE"];
   const teethFamily1 = ["OBTURATION", "ENDO", "EXTRACTION"];
   const teethGroup1 = [
@@ -143,7 +144,7 @@ export default function Dashboard() {
     });
   };
 
-  const popupClickHandler = (popupValue) => {
+  const popupClickHandler = (popupValue,popupimg='') => {
     setSelectedFamily((f) => [
       ...f,
       selectFamilyPopup.family + "-" + selectFamilyPopup.cell,
@@ -153,6 +154,7 @@ export default function Dashboard() {
       family: "",
       cell: "",
     });
+    setSelectedTreatment(popupimg)
   };
   const progressButtonClickHandler = () => {
     setTeethFamilyInProgress((f) => [
@@ -463,7 +465,7 @@ export default function Dashboard() {
           <MenuItem
             style={{ background: "transparent" }}
             divider
-            onClick={() => popupClickHandler(item.value)}
+            onClick={() => popupClickHandler(item.value,item.img)}
             key={i}
           >
             <Typography className={classes.listItem}>{item.value}</Typography>
@@ -503,7 +505,7 @@ export default function Dashboard() {
   return (
     <Grid
       container
-      xs={10}
+      xs={9}
       direction="column"
       style={{
         boxShadow: "0px 0px 60px rgba(0, 0, 0, 0.04)",
@@ -521,11 +523,11 @@ export default function Dashboard() {
       {/* Grid container */}
       <Grid item style={{ marginTop: "40px" }}>
         <Grid container >
-          <Grid item xs={10} style={{ flex: 1 }}>
+          <Grid item xs={8} style={{ flex: 1 }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -536,7 +538,7 @@ export default function Dashboard() {
                   fontWeight: "500",
                   display: "flex",
                   fontSize: "16px",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   lineHeight: "26px",
                   fontFamily: "Poppins",
                   fontStyle: "normal",
@@ -546,7 +548,7 @@ export default function Dashboard() {
                 <svg
                   width="20"
                   height="20"
-                  style={{ marginLeft: "70px" }}
+                  style={{ marginLeft: "10px" }}
                   viewBox="0 0 20 17"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -578,11 +580,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item xs style={{ flex: 1,  }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -594,7 +596,7 @@ export default function Dashboard() {
                   display: "flex",
                   fontSize: "16px",
                   display: "flex",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   lineHeight: "26px",
                   fontFamily: "Poppins",
                   fontStyle: "normal",
@@ -603,7 +605,7 @@ export default function Dashboard() {
               >
                 <svg
                   width="20"
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   height="20"
                   viewBox="0 0 13 13"
                   fill="none"
@@ -660,11 +662,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item xs style={{ flex: 1,  }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -676,7 +678,7 @@ export default function Dashboard() {
                   display: "flex",
                   fontSize: "16px",
                   display: "flex",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   lineHeight: "26px",
                   fontFamily: "Poppins",
                   fontStyle: "normal",
@@ -684,7 +686,7 @@ export default function Dashboard() {
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   width="20"
                   height="20"
                   viewBox="0 0 17 17"
@@ -734,11 +736,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item xs style={{ flex: 1, }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -749,7 +751,7 @@ export default function Dashboard() {
                   fontWeight: "500",
                   fontSize: "16px",
                   display: "flex",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   lineHeight: "26px",
                   fontFamily: "Poppins",
                   fontStyle: "normal",
@@ -757,7 +759,7 @@ export default function Dashboard() {
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   width="17"
                   height="17"
                   viewBox="0 0 17 17"
@@ -797,12 +799,12 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item style={{ flex: 1, }}>
             <div
               id="border-div"
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -815,13 +817,13 @@ export default function Dashboard() {
                   lineHeight: "26px",
                   display: "flex",
                   fontFamily: "Poppins",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   fontStyle: "normal",
                   color: "#000",
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px", }}
                   width="14"
                   height="18"
                   viewBox="0 0 14 18"
@@ -852,11 +854,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item style={{ flex: 1,  }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -869,13 +871,13 @@ export default function Dashboard() {
                   lineHeight: "26px",
                   display: "flex",
                   fontFamily: "Poppins",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   fontStyle: "normal",
                   color: "#000",
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   width="17"
                   height="17"
                   viewBox="0 0 17 17"
@@ -919,11 +921,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item style={{ flex: 1,  }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -936,13 +938,13 @@ export default function Dashboard() {
                   lineHeight: "26px",
                   display: "flex",
                   fontFamily: "Poppins",
-                  marginRight: "15px",
+                  // marginRight: "15px",
                   fontStyle: "normal",
                   color: "#000",
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   width="18"
                   height="16"
                   viewBox="0 0 18 16"
@@ -984,11 +986,11 @@ export default function Dashboard() {
               </Typography>
             </div>
           </Grid>
-          <Grid item style={{ flex: 1, marginLeft: "20px" }}>
+          <Grid item style={{ flex: 1,  }}>
             <div
               style={{
                 width: "100%",
-                padding: "10px 0px",
+                // padding: "10px 0px",
                 textAlign: "center",
               }}
               className="underline"
@@ -1005,7 +1007,7 @@ export default function Dashboard() {
                 }}
               >
                 <svg
-                  style={{ marginRight: "11px", marginLeft: "11px" }}
+                  style={{ marginRight: "11px",  }}
                   width="14"
                   height="18"
                   viewBox="0 0 14 18"
@@ -1076,7 +1078,7 @@ export default function Dashboard() {
               {/* grid */}
               <Grid
                 item
-                xs={12}
+                
                 style={{
                   border: "1px solid #E3EBF0",
                   borderRadius: "12px",
@@ -1097,7 +1099,7 @@ export default function Dashboard() {
                             className={classes.teethFamily}
                             component="th"
                             scope="row"
-                            style={{overflow:'hidden'}}
+                            style={{width:'10px'}}
                           >
                             {row}
                           </TableCell>
@@ -1107,6 +1109,7 @@ export default function Dashboard() {
                               aria-haspopup={true}
                               id={row + "-" + n}
                               style={{
+                                width:'10px',
                                 backgroundColor: "rgba(244, 248, 250, 0.5)",
                                 border: "1px solid #A5B3BC",
                                 borderLeft: i === 0 ? 0 : "1px solid #2d2d2d",
@@ -1174,22 +1177,24 @@ export default function Dashboard() {
                         </TableRow>
                       ))}
                       <TableRow>
-                        <TableCell style={{ border: 0 }}></TableCell>
+                        <TableCell style={{ border: 0,width:'10px' }}></TableCell>
                         {teethGroup1.map((n) => (
                           <TableCell
                             className={classes.teethFamily}
+                            style={{width:'10px'}}
                           >
                             {n}
                           </TableCell>
                         ))}
                       </TableRow>
                       <TableRow>
-                        <TableCell style={{ border: 0 }}></TableCell>
+                        <TableCell style={{ border: 0,width:'10px' }}></TableCell>
                         {teethGroup1.map((chrome) => (
                           <TableCell
                             style={{
                               borderBottom: "0px",
                               marginBottom: "10px",
+                              width:'10px'
                             }}
                           >
                             <a
@@ -1260,9 +1265,9 @@ export default function Dashboard() {
                         PIVOT
                       </p>
                       <TableRow>
-                        <TableCell style={{ border: 0 }}></TableCell>
+                        <TableCell style={{ border: 0,width:'10px' }}></TableCell>
                         {teethGroup2.map((chrome) => (
-                          <TableCell style={{ borderBottom: "0px" }}>
+                          <TableCell style={{ borderBottom: "0px",width:'10px' }}>
                             <a
                               onClick={() => {
                                 if (!removedTooth.includes(chrome)) {
@@ -1320,9 +1325,10 @@ export default function Dashboard() {
                         ))}
                       </TableRow>
                       <TableRow>
-                        <TableCell style={{ border: 0 }}></TableCell>
+                        <TableCell style={{ border: 0,width:'10px' }}></TableCell>
                         {teethGroup2.map((n) => (
                           <TableCell
+                          style={{width:'10px'}}
                             onClick={() =>
                               setRemoveToothAlert({
                                 active: true,
@@ -1341,6 +1347,7 @@ export default function Dashboard() {
                             className={classes.teethFamily}
                             component="th"
                             scope="row"
+                            style={{width:'10px'}}
                           >
                             {row}
                           </TableCell>
@@ -1350,6 +1357,7 @@ export default function Dashboard() {
                               aria-haspopup={true}
                               id={row + "-" + n}
                               style={{
+                                width:'10px',
                                 backgroundColor: "rgba(244, 248, 250, 0.5)",
                                 border: "1px solid #A5B3BC",
                                 borderLeft: i === 0 ? 0 : "1px solid #2d2d2d",
@@ -1402,7 +1410,7 @@ export default function Dashboard() {
                               >
                                 {selectedFamily.includes(row + "-" + n) ? (
                                   <img
-                                    src={(row != 'ENDO') ? ExtractImage : require('../../images/ENDO1.svg').default}
+                                    src={(row != 'ENDO') ? ExtractImage : selectedTreatment}
                                     style={{ width: "40px", height: "100%" }}
                                   />
                                 ) : (
@@ -1422,7 +1430,7 @@ export default function Dashboard() {
             </Grid>
           </Grid>
           {/* for solde */}
-          <Grid item md={4}>
+          {/* <Grid item md={4}>
             <img
               width="349px"
               height="417px"
@@ -1434,19 +1442,19 @@ export default function Dashboard() {
               }}
               src={require("../../images/imagedoc.png").default}
             ></img>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
       {/* 2 tables */}
       <Grid item style={{ marginTop: "1em" }}>
         {/* Overall container */}
-        <Grid container>
-          <Grid item md={6} xs={12} style={{ padding: "30px 14px 100px 40px" }}>
+        <Grid container xs={11}>
+          <Grid item md={6} xs={10} style={{ padding: "30px 14px 100px 40px" }}>
             <Grid container direction="column">
               <CardComp />
             </Grid>
           </Grid>
-          <Grid item md={6} xs={12} style={{ padding: "30px 40px 100px 14px" }}>
+          <Grid item md={6} xs={10} style={{ padding: "30px 40px 100px 14px" }}>
             <CardSt />
           </Grid>
         </Grid>
