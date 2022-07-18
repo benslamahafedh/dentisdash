@@ -7,7 +7,7 @@ import { Translate } from '@material-ui/icons';
 import './header.css'
 export default function Header() {
   return (
-    <Grid container direction="column"
+    <Grid xs={10} container direction="column"
       style={{
         backgroundColor: '#FFF',
         margin: '20px',
@@ -38,9 +38,9 @@ export default function Header() {
         </Grid>
         <Grid item>
           <p style={{ color: '#0A2E47', font: 'Poppins', fontStyle: 'normal', fontWeight: '600', fontSize: '36px', lineHeight: '50px' }}>Jhon Boe</p>
-          <p style={{ transform: 'TranslateY(-40px)', color: '#F05423', font: 'Open Sans', fontStyle: 'normal', fontSize: '14px', lineHeight: '26px', textTransform: 'uppercase' }}>patient</p>
+          <p style={{ color: '#F05423', font: 'Open Sans', fontStyle: 'normal', fontSize: '14px', lineHeight: '26px', textTransform: 'uppercase' }}>patient</p>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
         </Grid>
         <Grid item>
           <div class="dropdown">

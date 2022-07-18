@@ -24,7 +24,6 @@ import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 import "./dashboard.css";
 import ExtractImage from "../../images/cross.png";
 import MuiTableCell from "@material-ui/core/TableCell";
-
 import CardComp from "../Card/CardComp";
 import CardSt from "../Card/CardSt";
 
@@ -42,6 +41,20 @@ const teethFamilySample = [
   { label: "hémisection", value: "hémisection" },
   { label: "extraction chir", value: "extraction chir" },
 ];
+const endoTreatment = [
+  {
+    label: 'endo1', value: 'endo1'
+  },
+  {
+    label: 'endo2', value: 'endo2'
+  },
+  {
+    label: 'endo3', value: 'endo3'
+  },
+  {
+    label: 'endo4', value: 'endo4'
+  },
+]
 
 const categoriesSample = [
   { label: "EXTRACTION", value: "EXTRACTION" },
@@ -89,13 +102,12 @@ export default function Dashboard() {
   const [removeToothAlert, setRemoveToothAlert] = useState({
     active: null,
     color: "white",
-    number:''
+    number: ''
   });
 
   const [soinsStandardDialog, setSoinsStandardDialog] = useState(false);
   const [soinsStandard, setSoinsStandard] = useState([]);
-  const [soinsComplementriesDialog, setSoinsComplementriesDialog] =
-    useState(false);
+  const [soinsComplementriesDialog, setSoinsComplementriesDialog] = useState(false);
   const [soinsComplementries, setSoinsComplementries] = useState([]);
   const [soinDialogInput, setSoinDialogInput] = useState({
     region: "",
@@ -169,7 +181,7 @@ export default function Dashboard() {
     setRemoveToothAlert({
       active: null,
       color: "gray",
-      number:''
+      number: ''
     });
   };
   const addSoinStandardDialog = (
@@ -405,7 +417,7 @@ export default function Dashboard() {
             setRemoveToothAlert({
               active: null,
               color: 'gray',
-              number:''
+              number: ''
             })
           }
           color="primary"
@@ -418,6 +430,7 @@ export default function Dashboard() {
       </DialogActions>
     </Dialog>
   );
+  const x = (selectFamilyPopup.family != 'ENDO') ? teethFamilySample : endoTreatment
   const renderMenu = (menuID) => {
     return (
       <Menu
@@ -446,7 +459,7 @@ export default function Dashboard() {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
         disableScrollLock
       >
-        {teethFamilySample.map((item, i) => (
+        {x.map((item, i) => (
           <MenuItem
             style={{ background: "transparent" }}
             divider
@@ -490,6 +503,7 @@ export default function Dashboard() {
   return (
     <Grid
       container
+      xs={10}
       direction="column"
       style={{
         boxShadow: "0px 0px 60px rgba(0, 0, 0, 0.04)",
@@ -506,8 +520,8 @@ export default function Dashboard() {
       {renderRemovedToothAlert}
       {/* Grid container */}
       <Grid item style={{ marginTop: "40px" }}>
-        <Grid container>
-          <Grid item xs style={{ flex: 1 }}>
+        <Grid container >
+          <Grid item xs={10} style={{ flex: 1 }}>
             <div
               style={{
                 width: "100%",
@@ -550,11 +564,10 @@ export default function Dashboard() {
                   style={{
                     fontFamily: "Poppins",
                     fontStyle: "normal",
-                    fontWeight: "500",
+                    fontWeight: "300",
                     fontSize: "16px",
-                    lineHeight: "0",
-                    textAlign: "center",
-                    transform: "translateY(-7px)",
+                    // lineHeight: "0",
+                    // textAlign: "center",
                     color: "#6A7D89",
                   }}
                 >
@@ -637,7 +650,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -712,7 +724,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -776,7 +787,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -831,9 +841,7 @@ export default function Dashboard() {
                     fontStyle: "normal",
                     fontWeight: "500",
                     fontSize: "16px",
-                    lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -901,7 +909,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -967,7 +974,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -1021,7 +1027,6 @@ export default function Dashboard() {
                     fontSize: "16px",
                     lineHeight: "0",
                     textAlign: "center",
-                    transform: "translateY(-7px)",
                     color: "#6A7D89",
                   }}
                 >
@@ -1044,12 +1049,12 @@ export default function Dashboard() {
         }}
       ></div>
       <Grid item>
-        <Grid container>
+        <Grid  container spacing={4}>
           {/* for grid */}
           <Grid item md={8}>
             <Grid container direction="column">
               {/* SOINS */}
-              <Grid item container style={{ marginLeft: "20px" }}>
+              <Grid item container  style={{ marginLeft: "20px" }}>
                 <p
                   style={{
                     borderRadius: 0,
@@ -1071,6 +1076,7 @@ export default function Dashboard() {
               {/* grid */}
               <Grid
                 item
+                xs={12}
                 style={{
                   border: "1px solid #E3EBF0",
                   borderRadius: "12px",
@@ -1082,15 +1088,16 @@ export default function Dashboard() {
                   width: "1300px",
                 }}
               >
-                <TableContainer>
+                <TableContainer >
                   <Table>
-                    <TableBody>
+                    <TableBody >
                       {teethFamily.map((row) => (
-                        <TableRow key={row.name}>
+                        <TableRow  key={row.name}>
                           <TableCell
                             className={classes.teethFamily}
                             component="th"
                             scope="row"
+                            style={{overflow:'hidden'}}
                           >
                             {row}
                           </TableCell>
@@ -1120,20 +1127,21 @@ export default function Dashboard() {
                                     : "#fff",
                               }}
                               onClick={(e) => {
+
                                 if (selectedFamily.includes(row + "-" + n)) {
-                                  // setSelectedFamily((f) =>
-                                  //   f.filter((el) => el !== row + '-' + n)
-                                  // );
+                                  setSelectedFamily((f) =>
+                                    f.filter((el) => el !== row + '-' + n)
+                                  );
                                   setSelectFamilyPopup({
                                     active: e.currentTarget,
                                     family: row,
                                     cell: n,
                                   });
                                 } else {
-                                  // setSelectedFamily((f) => [
-                                  //   ...f,
-                                  //   row + '-' + n,
-                                  // ]);
+                                  setSelectedFamily((f) => [
+                                    ...f,
+                                    row + '-' + n,
+                                  ]);
                                   setSelectFamilyPopup({
                                     active: e.currentTarget,
                                     family: row,
@@ -1176,7 +1184,7 @@ export default function Dashboard() {
                         ))}
                       </TableRow>
                       <TableRow>
-                      <TableCell style={{ border: 0 }}></TableCell>
+                        <TableCell style={{ border: 0 }}></TableCell>
                         {teethGroup1.map((chrome) => (
                           <TableCell
                             style={{
@@ -1184,37 +1192,37 @@ export default function Dashboard() {
                               marginBottom: "10px",
                             }}
                           >
-                            <a 
-                            onClick={() => {
-                              if (!removedTooth.includes(chrome)) {
-                                setRemoveToothAlert({
-                                  active: true,
-                                  number:chrome,
-                                  color: 'gray',
-                                });
-                              }
-                            }}
-                            style={{
-                              cursor:'pointer'
-                            }}
+                            <a
+                              onClick={() => {
+                                if (!removedTooth.includes(chrome)) {
+                                  setRemoveToothAlert({
+                                    active: true,
+                                    number: chrome,
+                                    color: 'gray',
+                                  });
+                                }
+                              }}
+                              style={{
+                                cursor: 'pointer'
+                              }}
                             >
                               <svg
-                                style={{ marginLeft: "10px" }}
-                                width="30"
-                                height="30"
+                                style={{ margin: "0px",padding:"0" }}
+                                width="20"
+                                height="20"
                                 viewBox="0 0 30 28"
-                                fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
                                 xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
                                   d="M29.3238 13.9668C29.3238 21.4338 23.0308 27.5139 15.234 27.5139C7.43716 27.5139 1.1441 21.4338 1.1441 13.9668C1.1441 6.49987 7.43716 0.419732 15.234 0.419732C23.0308 0.419732 29.3238 6.49987 29.3238 13.9668Z"
-                                  fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                  fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
                                   stroke="#8A9AA4"
                                   stroke-width="0.837022"
                                 />
                                 <path
                                   d="M20.3994 13.9656C20.3994 16.8344 17.9787 19.187 14.9588 19.187C11.9388 19.187 9.51812 16.8344 9.51812 13.9656C9.51812 11.0968 11.9388 8.74414 14.9588 8.74414C17.9787 8.74414 20.3994 11.0968 20.3994 13.9656Z"
-                                  fill={removedTooth.includes(chrome)?`${removeToothAlert.color}`:'white'}
+                                  fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
                                   stroke="#8A9AA4"
                                   stroke-width="0.837022"
                                 />
@@ -1252,50 +1260,62 @@ export default function Dashboard() {
                         PIVOT
                       </p>
                       <TableRow>
-                        <p></p>
-                        {teethGroup1.map((chrome) => (
+                        <TableCell style={{ border: 0 }}></TableCell>
+                        {teethGroup2.map((chrome) => (
                           <TableCell style={{ borderBottom: "0px" }}>
-                            <svg
-                              width="30"
-                              style={{ marginLeft: "10px" }}
-                              height="30"
-                              viewBox="0 0 30 28"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M29.3238 13.9668C29.3238 21.4338 23.0308 27.5139 15.234 27.5139C7.43716 27.5139 1.1441 21.4338 1.1441 13.9668C1.1441 6.49987 7.43716 0.419732 15.234 0.419732C23.0308 0.419732 29.3238 6.49987 29.3238 13.9668Z"
-                                fill="white"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M20.3994 13.9656C20.3994 16.8344 17.9787 19.187 14.9588 19.187C11.9388 19.187 9.51812 16.8344 9.51812 13.9656C9.51812 11.0968 11.9388 8.74414 14.9588 8.74414C17.9787 8.74414 20.3994 11.0968 20.3994 13.9656Z"
-                                fill="white"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M25.1412 4.70015L19.1426 10.2058"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M11.1901 17.9943L5.19141 23.5"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M24.6056 23.4999L18.8634 17.7465"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                              <path
-                                d="M10.9344 10.3401L5.19267 4.58717"
-                                stroke="#8A9AA4"
-                                stroke-width="0.837022"
-                              />
-                            </svg>
+                            <a
+                              onClick={() => {
+                                if (!removedTooth.includes(chrome)) {
+                                  setRemoveToothAlert({
+                                    active: true,
+                                    number: chrome,
+                                    color: 'gray',
+                                  });
+                                }
+                              }}
+                              style={{ cursor: 'pointer' }}>
+                              <svg
+                                width="20"
+                                style={{ margin: "0px",padding:"0" }}
+                                height="20"
+                                viewBox="0 0 30 28"
+                                fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M29.3238 13.9668C29.3238 21.4338 23.0308 27.5139 15.234 27.5139C7.43716 27.5139 1.1441 21.4338 1.1441 13.9668C1.1441 6.49987 7.43716 0.419732 15.234 0.419732C23.0308 0.419732 29.3238 6.49987 29.3238 13.9668Z"
+                                  fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M20.3994 13.9656C20.3994 16.8344 17.9787 19.187 14.9588 19.187C11.9388 19.187 9.51812 16.8344 9.51812 13.9656C9.51812 11.0968 11.9388 8.74414 14.9588 8.74414C17.9787 8.74414 20.3994 11.0968 20.3994 13.9656Z"
+                                  fill={removedTooth.includes(chrome) ? `${removeToothAlert.color}` : 'white'}
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M25.1412 4.70015L19.1426 10.2058"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M11.1901 17.9943L5.19141 23.5"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M24.6056 23.4999L18.8634 17.7465"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                                <path
+                                  d="M10.9344 10.3401L5.19267 4.58717"
+                                  stroke="#8A9AA4"
+                                  stroke-width="0.837022"
+                                />
+                              </svg>
+                            </a>
                           </TableCell>
                         ))}
                       </TableRow>
@@ -1309,11 +1329,6 @@ export default function Dashboard() {
                                 number: n,
                               })
                             }
-                            style={{
-                              visibility: removedTooth.includes(n)
-                                ? "hidden"
-                                : "visible",
-                            }}
                             className={classes.teethFamily}
                           >
                             {n}
@@ -1387,7 +1402,7 @@ export default function Dashboard() {
                               >
                                 {selectedFamily.includes(row + "-" + n) ? (
                                   <img
-                                    src={ExtractImage}
+                                    src={(row != 'ENDO') ? ExtractImage : require('../../images/ENDO1.svg').default}
                                     style={{ width: "40px", height: "100%" }}
                                   />
                                 ) : (
@@ -1412,7 +1427,7 @@ export default function Dashboard() {
               width="349px"
               height="417px"
               style={{
-                marginLeft: "35%",
+                // marginLeft: "35%",
                 marginTop: "32%",
                 border: "1px solid #E3EBF0",
                 borderRadius: "12px",
