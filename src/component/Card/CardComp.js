@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "12px;",
   },
   Button: {
-    color: "#F05423 !important",
-    border: "0.5px solid #F05423",
+    color: "#FFF6F3 !important",
+    border: "0.5px solid #FFF6F3",
     backgroundColor: "#FFF6F3",
     marginRight: "10px",
     textTransform: "none;",
@@ -316,41 +316,71 @@ function CardDesign() {
                   <TableRow key={i}>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding: '6px',
                         borderBottom: '1px solid #000',
                         textAlign:'center',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.region}
+                      <p style={{
+                        background:'#FFF6F3',
+                        color:'#F05423;',
+                        textAlign:'center',
+                        border:'solid 2px #F05423',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.region}</p>
                     </TableCell>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding: '6px',
                         border: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.category}
+                      <p style={{
+                        background:'#FFF6F3',
+                        color:'#F05423;',
+                        textAlign:'center',
+                        border:'solid 2px #F05423',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.category}</p>
+                      
                     </TableCell>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding: '6px',
                         border: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.subcategory}
+                      <p style={{
+                        background:'#FFF6F3',
+                        color:'#F05423;',
+                        textAlign:'center',
+                        border:'solid 2px #F05423',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.subcategory}</p>
+                      
                     </TableCell>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding: '6px',
                         borderBottom: '1px solid #000',
                         textAlign:'center',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.soin}
+                      <p style={{
+                        background:'#FFF6F3',
+                        color:'#F05423;',
+                        textAlign:'center',
+                        border:'solid 2px #F05423',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.soin}</p>
                     </TableCell>
                   </TableRow>
                 ))}

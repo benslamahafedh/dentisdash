@@ -277,30 +277,53 @@ function CardSt() {
                   <TableRow key={i}>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding:'6px',
                         borderBottom: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.region}
+                      <p style={{
+                        background:'#E6F9F5',
+                        color:'#00A998;',
+                        textAlign:'center',
+                        border:'solid 2px #00A998',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.region}</p>
                     </TableCell>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding:'6px',
                         border: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.category}
+                      <p style={{
+                        background:'#E6F9F5',
+                        color:'#00A998;',
+                        textAlign:'center',
+                        border:'solid 2px #00A998',
+                        borderRadius:'4px',
+                        padding:'2px',
+                      }}>{s.category}</p>
+                      
                     </TableCell>
                     <TableCell
                       style={{
-                        padding: '5px 0',
+                        padding:'6px',
                         borderBottom: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
-                      {s.soin}
+                      <p style={{
+                        background:'#E6F9F5',
+                        color:'#00A998;',
+                        textAlign:'center',
+                        padding:'2px',
+                        border:'solid 2px #00A998',
+                        borderRadius:'4px'
+                      }}>{s.soin}</p>
+                      
                     </TableCell>
                   </TableRow>
                 ))}
