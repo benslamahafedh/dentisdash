@@ -111,11 +111,12 @@ function CardSt() {
       aria-labelledby="form-dialog-title"
       maxWidth="md"
     >
-      <DialogTitle id="form-dialog-title">Add Entry</DialogTitle>
+      <DialogTitle  style={{fontFamily:'Lato, sans-serif',}} id="form-dialog-title">Add Entry</DialogTitle>
       <DialogContent>
         <TextField
           select
           label="Region"
+          style={{fontFamily:'Lato, sans-serif',}}
           fullWidth
           SelectProps={{
             native: true,
@@ -129,7 +130,7 @@ function CardSt() {
           }
         >
           {[...teethGroup1, ...teethGroup2].map((t) => (
-            <option key={t} value={t}>
+            <option  style={{fontFamily:'Lato, sans-serif',}} key={t} value={t}>
               {t}
             </option>
           ))}
@@ -141,6 +142,7 @@ function CardSt() {
           SelectProps={{
             native: true,
           }}
+          
           value={soinDialogInput.category}
           onChange={(e) =>
             setSoinDialogInput({
@@ -148,10 +150,10 @@ function CardSt() {
               category: e.target.value,
             })
           }
-          style={{ marginTop: "1em" }}
+          style={{ fontFamily:'Lato, sans-serif', marginTop: "1em" }}
         >
           {categoriesSample.map((t) => (
-            <option key={t.value} value={t.value}>
+            <option  style={{fontFamily:'Lato, sans-serif',}}key={t.value} value={t.value}>
               {t.label}
             </option>
           ))}
@@ -170,26 +172,28 @@ function CardSt() {
               soin: e.target.value,
             })
           }
-          style={{ marginTop: "1em" }}
+          style={{ marginTop: "1em" ,fontFamily:'Lato, sans-serif',}}
         >
           {soinSample.map((t) => (
-            <option key={t.value} value={t.value}>
+            <option  style={{fontFamily:'Lato, sans-serif',}} key={t.value} value={t.value}>
               {t.label}
             </option>
           ))}
         </TextField>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSoinDialogClose} color="primary">
+        <Button  style={{fontFamily:'Lato, sans-serif',}} onClick={handleSoinDialogClose} color="primary">
           Cancel
         </Button>
         <Button
           onClick={() => {
             setSoinsStandard((en) => [...en, soinDialogInput]);
             setSoinsStandardDialog(false);
+            console.log(soinsStandard)
             handleSoinDialogSubmit();
           }}
           color="primary"
+          style={{fontFamily:'Lato, sans-serif',}}
         >
           Submit
         </Button>
@@ -209,7 +213,7 @@ function CardSt() {
       {addSoinStandardDialog}
       <CardContent className={classes.Content}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span style={{ fontFamily: "Poppins", fontWeight: 500 }}>
+          <span style={{ fontFamily:'Lato, sans-serif', fontWeight: 500 }}>
             Soins Standards
           </span>
           <Button
@@ -240,6 +244,7 @@ function CardSt() {
                 <TableRow>
                   <TableCell
                     style={{
+                      fontFamily:'Lato, sans-serif',
                       padding: 0,
                       borderRight: '1px solid #000',
                       textAlign:"center",
@@ -251,6 +256,7 @@ function CardSt() {
                   </TableCell>
                   <TableCell
                     style={{
+                      fontFamily:'Lato, sans-serif',
                       padding: 0,
                       borderRight: '1px solid #000',
                       textAlign:"center",
@@ -262,6 +268,7 @@ function CardSt() {
                   </TableCell>
                   <TableCell
                     style={{
+                      fontFamily:'Lato, sans-serif',
                       padding: 0,
                       borderBottom: '1px solid #000',
                       textAlign:"center"
@@ -277,14 +284,16 @@ function CardSt() {
                   <TableRow key={i}>
                     <TableCell
                       style={{
+                        fontFamily:'Lato, sans-serif',
                         padding:'6px',
                         borderBottom: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
                       <p style={{
+                        fontFamily:'Lato, sans-serif',
                         background:'#E6F9F5',
-                        color:'#00A998;',
+                        color:'#00A998',
                         textAlign:'center',
                         border:'solid 2px #00A998',
                         borderRadius:'4px',
@@ -293,14 +302,16 @@ function CardSt() {
                     </TableCell>
                     <TableCell
                       style={{
+                        fontFamily:'Lato, sans-serif',
                         padding:'6px',
                         border: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
                       <p style={{
+                        fontFamily:'Lato, sans-serif',
                         background:'#E6F9F5',
-                        color:'#00A998;',
+                        color:'#00A998',
                         textAlign:'center',
                         border:'solid 2px #00A998',
                         borderRadius:'4px',
@@ -310,14 +321,16 @@ function CardSt() {
                     </TableCell>
                     <TableCell
                       style={{
+                        fontFamily:'Lato, sans-serif',
                         padding:'6px',
                         borderBottom: '1px solid #000',
                       }}
                       className={classes.teethFamily}
                     >
                       <p style={{
+                        fontFamily:'Lato, sans-serif',
                         background:'#E6F9F5',
-                        color:'#00A998;',
+                        color:'#00A998',
                         textAlign:'center',
                         padding:'2px',
                         border:'solid 2px #00A998',
@@ -330,6 +343,7 @@ function CardSt() {
                 <TableRow>
                   <TableCell
                     style={{
+                      fontFamily:'Lato, sans-serif',
                       padding: '10px 0px',
                       borderBottom: '1px solid #000',
                     }}
@@ -350,52 +364,7 @@ function CardSt() {
                     className={classes.teethFamily}
                   ></TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      borderBottom: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      border: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      borderBottom: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      borderBottom: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      border: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                  <TableCell
-                    style={{
-                      padding: '10px 0px',
-                      borderBottom: '1px solid #000',
-                    }}
-                    className={classes.teethFamily}
-                  ></TableCell>
-                </TableRow>
+                
               </TableBody>
             </Table>
           </TableContainer>

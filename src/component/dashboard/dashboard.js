@@ -15,6 +15,7 @@ import {
   DialogContentText,
   TextField,
   Menu,
+  Checkbox,
   MenuItem,
   Typography,
 } from "@material-ui/core";
@@ -29,6 +30,7 @@ import CardSt from "../Card/CardSt";
 import endo1 from "../../images/ENDO1.png";
 import endo2 from "../../images/ENDO2.png";
 import endo3 from "../../images/ENDO3.png";
+import { cyan } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   teethFamily: {
@@ -48,17 +50,17 @@ const endoTreatment = [
   {
     label: "endo1",
     value: "endo1",
-    img: endo1,
+
   },
   {
     label: "endo2",
     value: "endo2",
-    img: endo2,
+
   },
   {
     label: "endo3",
     value: "endo3",
-    img: endo3,
+
   },
 ];
 
@@ -89,6 +91,9 @@ let subCategorySample = [
 
   { label: "PAT sur IMPLANTS", value: "PAT sur IMPLANTS" },
 ];
+
+
+
 export default function Dashboard() {
   const classes = useStyles();
   ///this will save all grid cross icon
@@ -99,6 +104,14 @@ export default function Dashboard() {
   const [teethFamilyDone, setTeethFamilyInDone] = useState([]);
   //this will save all removed tooth
   const [removedTooth, setRemovedTooth] = useState([]);
+  //this will save obturation choices 
+  const [obturationChoice1, setObturationChoice1] = useState([])
+  const [obturationChoice2, setObturationChoice2] = useState([])
+  const [obturationChoice3, setObturationChoice3] = useState([])
+  const [f, setF] = useState([])
+  const [s, setS] = useState([])
+  //this will control checkboxes 
+  const [disabled, setDisabled] = useState(false)
 
   const [selectFamilyPopup, setSelectFamilyPopup] = useState({
     active: null,
@@ -110,7 +123,6 @@ export default function Dashboard() {
     color: "white",
     number: "",
   });
-
   const [soinsStandardDialog, setSoinsStandardDialog] = useState(false);
   const [soinsStandard, setSoinsStandard] = useState([]);
   const [soinsComplementriesDialog, setSoinsComplementriesDialog] =
@@ -122,7 +134,23 @@ export default function Dashboard() {
     soin: "",
     subcategory: "",
   });
-  const [selectedTreatment, setSelectedTreatment] = useState("");
+  const [endoFamily1, setEndoFamily1] = useState([])
+  const [endoFamily2, setEndoFamily2] = useState([])
+  const [endoFamily3, setEndoFamily3] = useState([])
+  const [menuDisabled1, setMenuDisabled1] = useState(false)
+  const [menuDisabled2, setMenuDisabled2] = useState(false)
+  const [menuDisabled3, setMenuDisabled3] = useState(false)
+  const [menuDisabledF, setMenuDisabledF] = useState(false)
+  const [menuDisabledS, setMenuDisabledS] = useState(false)
+  const [obturationAlert, setObturationAlert] = useState(
+    {
+      active: null,
+      choice: "",
+    }
+  )
+  const [counter, setCounter] = useState(0)
+  const [selectedItems, setSelectedItems] = useState([])
+  const [choice, setChoice] = useState(null)
   const teethFamily = ["IMPLANT", "PROTHESE FIXE", "PROVISOIRE"];
   const teethFamily1 = ["OBTURATION", "ENDO", "EXTRACTION"];
   const teethGroup1 = [
@@ -131,7 +159,29 @@ export default function Dashboard() {
   const teethGroup2 = [
     48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38,
   ];
-
+  let obturationTreatment = [
+    {
+      label: "1face",
+      value: "1face",
+    },
+    {
+      label: "2face",
+      value: "2face",
+    },
+    {
+      label: "3face",
+      value: "3face",
+    },
+    {
+      label: "F",
+      value: "F",
+    },
+    {
+      label: "S",
+      value: "S",
+    },
+  ];
+  const [menuID, setMenuID] = useState('')
   const handleSoinDialogClose = () => {
     setSoinsStandardDialog(false);
     setSoinsComplementriesDialog(false);
@@ -150,18 +200,121 @@ export default function Dashboard() {
       subcategory: "",
     });
   };
-  const endoHistory = []
-  const popupClickHandler = (popupValue, popupimg = selectedTreatment) => {
+  const handlePopupObturation = (e) => {
+    if (!selectedItems.includes(e.target.id)) {
+      setSelectedItems([e.target.id, ...selectedItems]);
+
+    } else {
+      setSelectedItems([...selectedItems.filter((val) => val !== e.target.id)]);
+    }
+  }
+  const popupClickHandler = (popupValue, i, menuID) => {
     setSelectedFamily((f) => [
       ...f,
       selectFamilyPopup.family + "-" + selectFamilyPopup.cell,
     ]);
+    if (i === 0 && menuID.includes('ENDO')) {
+      setEndoFamily1((f) => [
+        ...f,
+        menuID
+      ])
+    }
+    if (i === 1 && menuID.includes('ENDO')) {
+      setEndoFamily2((f) => [
+        ...f,
+        menuID
+      ])
+      console.log(endoFamily2)
+    }
+    if (i === 2 && menuID.includes('ENDO')) {
+      setEndoFamily3((f) => [
+        ...f,
+        menuID
+      ])
+    }
+    if (i === 3 && menuID.includes('OBTURATION')) {
+      setF((f) => [
+        ...f,
+        ['F', menuID]
+      ])
+      for (let i=0 ;i<s.length;i++){
+        if(s[i][1]==menuID){
+          setS((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<f.length;i++){
+        if(f[i][1]==menuID){
+          setF((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice1.length;i++){
+        if(obturationChoice1[i][1]==menuID){
+          console.log(obturationChoice1)
+          setObturationChoice1((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice2.length;i++){
+        if(obturationChoice2[i][1]==menuID){
+          setObturationChoice2((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice3.length;i++){
+        if(obturationChoice3[i][1]==menuID){
+          setObturationChoice3((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      
+      
+    }
+    if (i === 4 && menuID.includes('OBTURATION')) {
+      setS((f) => [
+        ...f,
+        ['S', menuID]
+      ])
+      for (let i=0 ;i<s.length;i++){
+        if(s[i][1]==menuID){
+          setS((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<f.length;i++){
+        if(f[i][1]==menuID){
+          setF((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice1.length;i++){
+        if(obturationChoice1[i][1]==menuID){
+          console.log(obturationChoice1)
+          setObturationChoice1((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice2.length;i++){
+        if(obturationChoice2[i][1]==menuID){
+          setObturationChoice2((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice3.length;i++){
+        if(obturationChoice3[i][1]==menuID){
+          setObturationChoice3((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      
+      
+    }
     setSelectFamilyPopup({
       active: null,
       family: "",
       cell: "",
     });
-    setSelectedTreatment((selectedTreatment) => popupimg);
   };
   const progressButtonClickHandler = () => {
     setTeethFamilyInProgress((f) => [
@@ -174,6 +327,125 @@ export default function Dashboard() {
       cell: "",
     });
   };
+  const obturationChoiceHandler = () => {
+    if (choice === 0 && menuID.includes('OBTURATION')) {
+      
+      setObturationChoice1((f) => [
+        ...f,
+        [selectedItems, menuID, true]
+      ])
+      for (let i=0 ;i<obturationChoice1.length;i++){
+        if(obturationChoice1[i][1]==menuID){
+          setObturationChoice1((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<s.length;i++){
+        if(s[i][1]==menuID){
+          setS((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<f.length;i++){
+        if(f[i][1]==menuID){
+          setF((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice2.length;i++){
+        if(obturationChoice2[i][1]==menuID){
+          setObturationChoice2((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice3.length;i++){
+        if(obturationChoice3[i][1]==menuID){
+          setObturationChoice3((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+    }
+    if (choice === 1 && menuID.includes('OBTURATION')) {
+      
+      setObturationChoice2((f) => [
+        ...f,
+        [selectedItems.join(''), menuID, true]
+      ])
+      for (let i=0 ;i<obturationChoice2.length;i++){
+        if(obturationChoice2[i][1]==menuID){
+          setObturationChoice2((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice3.length;i++){
+        if(obturationChoice3[i][1]==menuID){
+          setObturationChoice3((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice1.length;i++){
+        if(obturationChoice1[i][1]==menuID){
+          setObturationChoice1((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<s.length;i++){
+        if(s[i][1]==menuID){
+          setS((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<f.length;i++){
+        if(f[i][1]==menuID){
+          setF((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+
+    }
+    if (choice === 2 && menuID.includes('OBTURATION')) {
+      
+      setObturationChoice3((f) => [
+        ...f,
+        [selectedItems.join(''), menuID, true]
+      ])
+      for (let i=0 ;i<obturationChoice3.length;i++){
+        if(obturationChoice3[i][1]==menuID){
+          setObturationChoice3((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice2.length;i++){
+        if(obturationChoice2[i][1]==menuID){
+          setObturationChoice2((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<obturationChoice1.length;i++){
+        if(obturationChoice1[i][1]==menuID){
+          setObturationChoice1((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<s.length;i++){
+        if(s[i][1]==menuID){
+          setS((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+      for (let i=0 ;i<f.length;i++){
+        if(f[i][1]==menuID){
+          setF((f)=>f.filter((_,index)=>index!==i))
+          break
+        }
+      }
+    }
+    setSelectedItems([])
+    setObturationAlert({
+      active: false,
+      choice: ''
+    })
+  }
   const doneButtonClickHandler = () => {
     setTeethFamilyInDone((f) => [
       ...f,
@@ -400,6 +672,69 @@ export default function Dashboard() {
     </Dialog>
   );
 
+  const renderObturationAlert = (
+    <Dialog
+      open={obturationAlert.active}
+      onClose={() =>
+        setObturationAlert({
+          active: false,
+          choice: "",
+        })
+      }
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle style={{fontFamily:'Lato, sans-serif',}} id="alert-dialog-title">
+        Choose {choice + 1} options (choice is permanent)
+      </DialogTitle>
+      <DialogContent>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Checkbox onClick={handlePopupObturation}
+              style={{ color: 'gray' }}
+              inputProps={{ 'aria-label': 'controlled' }}
+              id='O'
+            /><label>O</label>
+          </Grid>
+          <Grid item xs={4}>
+            <Checkbox id="V" onClick={handlePopupObturation} style={{ color: 'gray' }} type='checkbox' name="V" value='V'></Checkbox>
+            <label>V</label>
+          </Grid>
+          <Grid item xs={8}>
+            <Checkbox id="L" onClick={handlePopupObturation} style={{ color: 'gray' }} type='checkbox' name="L" value='L'></Checkbox>
+            <label>L</label>
+          </Grid>
+          <Grid item xs={4}>
+            <Checkbox id="M" onClick={handlePopupObturation} style={{ color: 'gray' }} type='checkbox' name="M" value='M'></Checkbox>
+            <label>M</label>
+          </Grid>
+          <Grid item xs={8}>
+            <Checkbox id="D" onClick={handlePopupObturation} style={{ color: 'gray' }} type='checkbox' name="D" value='D'></Checkbox>
+            <label>D</label>
+          </Grid>
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={() => {
+            setObturationAlert({
+              active: false,
+              choice: ''
+            })
+            setSelectedItems([])
+          }
+          }
+          style={{fontFamily:'Lato, sans-serif',}}
+          color="primary"
+        >
+          Cancel
+        </Button>
+        <Button style={{fontFamily:'Lato, sans-serif',}} onClick={obturationChoiceHandler} disabled={selectedItems.length - 1 > choice || selectedItems.length < choice + 1} color="primary" autoFocus>
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
   const renderRemovedToothAlert = (
     <Dialog
       open={removeToothAlert.active}
@@ -413,11 +748,11 @@ export default function Dashboard() {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle style={{fontFamily:'Lato, sans-serif',}} id="alert-dialog-title">
         Are You sure you want to remove teeth
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText style={{fontFamily:'Lato, sans-serif',}} id="alert-dialog-description">
           This will permanently delete teeth {removeToothAlert.number}
         </DialogContentText>
       </DialogContent>
@@ -430,18 +765,25 @@ export default function Dashboard() {
               number: "",
             })
           }
+          style={{fontFamily:'Lato, sans-serif',}}
           color="primary"
         >
           Cancel
         </Button>
-        <Button onClick={removeToothHandler} color="primary" autoFocus>
+        <Button style={{fontFamily:'Lato, sans-serif',}} onClick={removeToothHandler} color="primary" autoFocus>
           OK
         </Button>
       </DialogActions>
     </Dialog>
   );
-  const x =
-    selectFamilyPopup.family != "ENDO" ? teethFamilySample : endoTreatment;
+  let x = teethFamilySample
+  if (selectFamilyPopup.family === "ENDO") {
+    x = endoTreatment
+  }
+  if (selectFamilyPopup.family === 'OBTURATION') {
+    x = obturationTreatment
+  }
+
   const renderMenu = (menuID) => {
     return (
       <Menu
@@ -470,18 +812,26 @@ export default function Dashboard() {
         transformOrigin={{ vertical: "top", horizontal: "center" }}
         disableScrollLock
       >
+        {renderObturationAlert}
         {x.map((item, i) => (
           <MenuItem
             style={{ background: "transparent" }}
             divider
             onClick={() => {
-              menuID = menuID + '-' + i
-              popupClickHandler(item.value, menuID)
-              console.log(selectedTreatment)
+              popupClickHandler(item.value, i, menuID)
+              if (menuID.includes("OBTURATION") && item.label != 'F' && item.label != 'S') {
+                setObturationAlert({
+                  active: true,
+                  choice: ''
+                })
+                setChoice(i)
+                setMenuID(menuID)
+
+              }
             }}
             key={i}
           >
-            <Typography className={classes.listItem}>{item.value}</Typography>
+            <Typography style={{fontFamily:'Lato, sans-serif'}} className={classes.listItem}>{item.value}</Typography>
           </MenuItem>
         ))}
         <MenuItem
@@ -604,7 +954,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -672,7 +1022,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -732,7 +1082,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -782,7 +1132,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -860,7 +1210,7 @@ export default function Dashboard() {
 
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -915,7 +1265,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -967,7 +1317,7 @@ export default function Dashboard() {
               </svg>
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -1044,7 +1394,7 @@ export default function Dashboard() {
 
               <p
                 style={{
-                  fontFamily: "Poppins",
+                  
                   fontStyle: "normal",
                   fontWeight: "500",
                   fontSize: "16px",
@@ -1082,7 +1432,7 @@ export default function Dashboard() {
                     borderRadius: 0,
                     color: "#2d2d2d",
                     marginBottom: "40px",
-                    fontFamily: "Poppins",
+                    
                     fontStyle: "normal",
                     fontWeight: "600",
                     fontSize: "18px",
@@ -1147,19 +1497,19 @@ export default function Dashboard() {
                               }}
                               onClick={(e) => {
                                 if (selectedFamily.includes(row + "-" + n)) {
-                                  setSelectedFamily((f) =>
-                                    f.filter((el) => el !== row + "-" + n)
-                                  );
+                                  // setSelectedFamily((f) =>
+                                  //   f.filter((el) => el !== row + "-" + n)
+                                  // );
                                   setSelectFamilyPopup({
                                     active: e.currentTarget,
                                     family: row,
                                     cell: n,
                                   });
                                 } else {
-                                  setSelectedFamily((f) => [
-                                    ...f,
-                                    row + "-" + n,
-                                  ]);
+                                  // setSelectedFamily((f) => [
+                                  //   ...f,
+                                  //   row + "-" + n,
+                                  // ]);
                                   setSelectFamilyPopup({
                                     active: e.currentTarget,
                                     family: row,
@@ -1428,6 +1778,8 @@ export default function Dashboard() {
                                     : "#fff",
                               }}
                               onClick={(e) => {
+                                setDisabled(false)
+                                setCounter(null)
                                 if (selectedFamily.includes(row + "-" + n)) {
                                   // setSelectedFamily((f) =>
                                   //   f.filter((el) => el === row + '-' + n)
@@ -1437,6 +1789,7 @@ export default function Dashboard() {
                                     family: row,
                                     cell: n,
                                   });
+
                                 } else {
                                   // setSelectedFamily((f) => [
                                   //   ...f,
@@ -1458,24 +1811,78 @@ export default function Dashboard() {
                                   height: "100%",
                                 }}
                               >
-                                {selectedFamily.includes(row + "-" + n) ? (
-                                  {
-                                    if(selectedTreatment) {
-                                      (<img
-                                        src={
-                                          row != "ENDO"
-                                            ? ExtractImage
-                                            : selectedTreatment
-                                        }
-                                        style={{ width: "40px", height: "100%" }}
-                                      />)
+                                {selectedFamily.includes(row + "-" + n) && row === 'ENDO' && (
+                                  (endoFamily1.includes(row + "-" + n) && <img
+                                    src={
+                                      row != "ENDO"
+                                        ? ExtractImage
+                                        : endo1
                                     }
-                                  }
-                                ) : (
-                                  <div
-                                    style={{ width: "40px", height: "40px" }}
-                                  ></div>
+                                    style={{ width: "40px", height: "100%" }}
+                                  />
+                                    || endoFamily2.includes(row + "-" + n) && <img
+                                      src={
+                                        row != "ENDO"
+                                          ? ExtractImage
+                                          : endo2
+                                      }
+                                      style={{ width: "40px", height: "100%" }}
+                                    />
+                                    || (endoFamily3.includes(row + "-" + n) && <img
+                                      src={
+                                        row != "ENDO"
+                                          ? ExtractImage
+                                          : endo3
+                                      }
+                                      style={{ width: "40px", height: "100%" }}
+                                    />)
+                                  )
                                 )}
+                                {selectedFamily.includes(row + '-' + n) && row === 'OBTURATION' &&
+                                  (
+                                    (obturationChoice1.map((menuid) => (
+                                      (menuid[1] == row + '-' + n) &&
+                                      <div style={{ width: '40px', textAlign: 'center', height: '100%' }}>
+                                        {menuid[0]}
+                                      </div>
+                                    )))
+                                  )
+                                }
+                                {selectedFamily.includes(row + '-' + n) && row === 'OBTURATION' &&
+                                  (obturationChoice2.map((menuid) => (
+                                    (menuid[1] == row + '-' + n) &&
+                                    <div style={{ width: '40px', textAlign: 'center', height: '100%' }}>
+                                      {menuid[0]}
+                                    </div>
+                                  )))}
+                                {selectedFamily.includes(row + '-' + n) && row === 'OBTURATION' &&
+                                  (obturationChoice3.map((menuid) => (
+                                    (menuid[1] == row + '-' + n) &&
+                                    <div style={{ width: '40px', textAlign: 'center', height: '100%' }}>
+                                      {menuid[0]}
+                                    </div>
+                                  )))}
+                                {selectedFamily.includes(row + '-' + n) && row === 'OBTURATION' &&
+                                  (f.map((menuid) => (
+                                    (menuid[1] == row + '-' + n) &&
+                                    <div style={{ width: '40px', textAlign: 'center', height: '100%' }}>
+                                      {menuid[0]}
+                                    </div>
+                                  )))}
+                                {selectedFamily.includes(row + '-' + n) && row === 'OBTURATION' &&
+                                  (s.map((menuid) => (
+                                    (menuid[1] == row + '-' + n) &&
+                                    <div onClick={() => console.log('heheh')} style={{ width: '40px', textAlign: 'center', height: '100%' }}>
+                                      {menuid[0]}
+                                    </div>
+                                  )))}
+
+                                {selectedFamily.includes(row + '-' + n) && row != 'ENDO' && row != 'OBTURATION' &&
+                                  <img
+                                    src={ExtractImage}
+                                    style={{ width: '40px', height: '100%' }}
+                                  />
+                                }
                               </div>
                             </TableCell>
                           ))}
@@ -1517,6 +1924,6 @@ export default function Dashboard() {
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }

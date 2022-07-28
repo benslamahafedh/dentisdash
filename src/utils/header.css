@@ -1,9 +1,10 @@
 /* Dropdown Button */
-.dropbtn {
+.dropbtn  {
   background-color: #ffffff;
   color: #6a7d89;
   padding: 8px 10px;
   font-size: 16px;
+  font-family: 'Lato', sans-serif !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +33,7 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  transform: translate(180px);
+  transform: translate(180px,-80px);
 }
 
 /* Links inside the dropdown */
@@ -49,9 +50,9 @@
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+/* .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {

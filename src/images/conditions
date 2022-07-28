@@ -1,0 +1,17 @@
+Ok sure
+
+For obturation, the dentist can choose between the five elements : 1 face, 2 faces, 3 faces, F or S
+
+Means he can't choose for example 1 face and another one from the others like 2 face, 3 faces, F or S and this is applied to each choice
+
+To explain more, if he choose for ex 1 face the 4 others should be desactived and he can't add it to the 1st choice
+
+And if he choose 1 face, he needs to specify if it's : O, V, L,M or D
+
+For 2 faces, needs to sepecify if it's : MO, DO, OV or OL
+
+For 3 faces, needs to specify if it's : MOD, MOL or DOL
+
+And for F and S it's just the first choice F or S
+
+What it can be as side of dev, having select list for the first choices and after choosing 1 face, 2face or 3 faces another select list should be placed switch on the first choice

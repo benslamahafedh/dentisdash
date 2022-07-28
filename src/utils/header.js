@@ -3,9 +3,16 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import InsertInvitationIcon from "@material-ui/icons/InsertInvitation";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Translate } from "@material-ui/icons";
+import { Block, Translate } from "@material-ui/icons";
 import "./header.css";
 export default function Header() {
+  const dropDown = () => {
+    let but = document.getElementById('but')
+    if (but.style.getPropertyValue('display') === 'none') {
+      but.style.setProperty('display', 'Block')
+    } else
+      but.style.setProperty('display', 'none')
+  }
   return (
     <Grid
       container
@@ -52,7 +59,7 @@ export default function Header() {
               fontWeight: "600",
               fontSize: "36px",
               lineHeight: "50px",
-              transform:'translateY(20px)'
+              transform: 'translateY(20px)'
             }}
           >
             Jhon Boe
@@ -65,7 +72,7 @@ export default function Header() {
               fontSize: "14px",
               lineHeight: "26px",
               textTransform: "uppercase",
-              transform:'translateY(20px)'
+              transform: 'translateY(20px)'
             }}
           >
             patient
@@ -74,8 +81,8 @@ export default function Header() {
 
         <Grid item style={{ marginLeft: "60%" }}>
           <div class="dropdown">
-            <button class="dropbtn">Exporter en Tant que</button>
-            <div class="dropdown-content">
+            <button onClick={() => dropDown()} class="dropbtn">Exporter en Tant que</button>
+            <div id='but' class="dropdown-content">
               <a href="#">Link 1</a>
               <a href="#">Link 2</a>
               <a href="#">Link 3</a>
